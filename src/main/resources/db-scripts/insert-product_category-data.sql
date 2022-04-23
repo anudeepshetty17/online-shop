@@ -1,0 +1,1 @@
+INSERT INTO PRODUCT_CATEGORY(CATEGORY_NAME) VALUES ('Books'), ('Coffee Mugs'), ('Mouse Pads'), ('Luggage Tags')
