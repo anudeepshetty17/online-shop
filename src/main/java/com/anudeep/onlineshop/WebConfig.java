@@ -13,7 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry corsRegistry) {
         corsRegistry.addMapping("/**")
-                .allowedOrigins("http://anudeepui.herokuapp.com")
+                .allowedOrigins("https://anudeepui.herokuapp.com/")
                 .allowedOrigins("http://localhost:4200")
                 .allowedMethods("*")
                 .maxAge(3600L)
