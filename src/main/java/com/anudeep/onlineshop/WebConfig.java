@@ -16,7 +16,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins("https://anudeepui.herokuapp.com")
                 .allowedOrigins("http://anudeepui.herokuapp.com")
                 .allowedOrigins("http://localhost:4200")
-                .allowedOrigins("*")
+                .allowedOriginPatterns("*")
                 .allowedMethods("*")
                 .maxAge(3600L)
                 .allowedHeaders("*")
