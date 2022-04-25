@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.anudeep.onlineshop.model.Product;
+import com.anudeep.onlineshop.service.CategoryService;
 import com.anudeep.onlineshop.service.ProductService;
 
 @CrossOrigin
@@ -28,6 +29,10 @@ public class ProductController {
 
 	@Autowired
 	private ProductService productService;
+
+	
+	@Autowired
+	private CategoryService categoryService;
 
 	/**
 	 * fetch-all-products endpoint
@@ -88,6 +93,7 @@ public class ProductController {
 	 */
 	@PostMapping(value = { "/add", "/add/" })
 	public ResponseEntity<String> addProduct(@RequestBody Product productToAdd, HttpSession session,HttpServletRequest request) {
+		
 		return productService.save(productToAdd, session,request);
 	}
 

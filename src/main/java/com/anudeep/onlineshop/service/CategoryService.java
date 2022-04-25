@@ -30,6 +30,7 @@ public interface CategoryService {
 
 	ResponseEntity<String> save(Category categoryToSave, HttpSession session,HttpServletRequest request);
 
+	Category getbyType(Integer type);
     
     
 

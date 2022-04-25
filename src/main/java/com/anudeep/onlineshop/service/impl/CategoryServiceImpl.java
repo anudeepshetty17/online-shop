@@ -47,7 +47,21 @@ public class CategoryServiceImpl implements CategoryService {
     public ResponseEntity<List<Category>> getAll() {
 
         // return all the categories
-        return new ResponseEntity<>(categoryRepository.findByOrderByCategoryTypeAsc(), HttpStatus.OK);
+    	int i =0;
+    	Category catt = null;
+    	List<Category> cats = categoryRepository.findByOrderByCategoryTypeAsc();
+    	for(Category cat:cats) {
+    		if(cat.getCategoryType()==0) {
+    			catt = cat;
+    		}
+    		if(cat.getProducts()!=null) {
+    			i+=cat.getProducts().size();
+    			cat.setProductsCount(cat.getProducts().size());
+    		}
+    		
+    	}
+    	catt.setProductsCount(i);
+        return new ResponseEntity<>(cats, HttpStatus.OK);
 
     }
 
@@ -311,7 +325,7 @@ public class CategoryServiceImpl implements CategoryService {
 
                         // yes, it does exist; delete it and all products too
                         categoryRepository.deleteById(categoryId);
-                        System.out.println("Total Products Deleted:"+productRepository.deleteByCategoryType(cat.getCategoryType()));
+                        System.out.println("Total Products Deleted:"+productRepository.deleteByCategory(cat));
                         
 
                         // respond with confirmation
@@ -372,4 +386,9 @@ public class CategoryServiceImpl implements CategoryService {
         }
 
     }
+
+	@Override
+	public Category getbyType(Integer type) {
+		return categoryRepository.findByCategoryType(type);
+	}
 }

@@ -1,13 +1,22 @@
 package com.anudeep.onlineshop.model;
 
-import lombok.Data;
-import org.hibernate.annotations.NaturalId;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-import java.io.Serializable;
-import java.util.Date;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.NaturalId;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.Data;
 
 /**
  * This Category class is used to represent
@@ -33,5 +42,14 @@ public class Category implements Serializable {
 
     @Column(name = "UPDATE_TIME")
     private Date updateTime;
-
+  
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CATEGORY_TYPE",referencedColumnName = "CATEGORY_TYPE")  
+    private List<Product> products;
+    
+    @Transient
+    private Integer productsCount;
+    
+   
 }

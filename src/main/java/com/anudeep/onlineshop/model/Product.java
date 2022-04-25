@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * This Product class is used to represent
@@ -29,10 +30,7 @@ public class Product implements Serializable {
     @Column(name = "PRODUCT_ID")
     private String id;
 
-    @Column(name = "CATEGORY_TYPE", nullable = false)
-    @ColumnDefault("0")
-    private Integer categoryType;
-
+   
     @Column(name = "CREATE_TIME")
     @CreationTimestamp
     private Date createTime;
@@ -61,5 +59,24 @@ public class Product implements Serializable {
     @Column(name = "UPDATE_TIME")
     @UpdateTimestamp
     private Date updateTime;
+    
+    @OneToOne(fetch = FetchType.EAGER,cascade = { CascadeType.MERGE, CascadeType.PERSIST } )
+    @JoinColumn(  
+    		name = "CATEGORY_TYPE",
+        referencedColumnName = "CATEGORY_TYPE", updatable = false
+    )
+    private Category category;
+    
+    @Transient
+    private Integer categoryType;
+    
+    public Integer getCategoryType()
+    {
+    	if(categoryType==null) {
+    		return category.getCategoryType();
+    	}
+    	return categoryType;
+    }
+      
 
 }

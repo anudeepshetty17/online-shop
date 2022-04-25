@@ -6,6 +6,10 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * @author anude
+ *
+ */
 @Entity
 @Table(name = "CART_ITEMS")
 @Getter

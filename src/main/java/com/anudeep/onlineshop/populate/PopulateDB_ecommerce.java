@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 
 /**
  *
- * @author Saily
+ * @author Anudeep
  */
 
 public class PopulateDB_ecommerce  {

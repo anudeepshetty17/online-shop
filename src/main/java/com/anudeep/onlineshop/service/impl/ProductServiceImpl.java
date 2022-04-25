@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.anudeep.onlineshop.model.Category;
 import com.anudeep.onlineshop.model.Product;
 import com.anudeep.onlineshop.model.User;
 import com.anudeep.onlineshop.repository.CategoryRepository;
@@ -126,7 +127,8 @@ public class ProductServiceImpl implements ProductService {
     public ResponseEntity<List<Product>> getAllByCategory(Integer categoryType) {
 
         // does the category exist?
-        if (categoryRepository.findByCategoryType(categoryType) != null) {
+    	Category cat = categoryRepository.findByCategoryType(categoryType);
+        if (cat != null) {
 
             // yes, the category exists; proceed with request
 
@@ -139,7 +141,7 @@ public class ProductServiceImpl implements ProductService {
 
             } else {
 
-                productListByCategory = productRepository.findAllByCategoryType(categoryType);
+                productListByCategory = productRepository.findAllByCategory(cat);
 
             }
 
@@ -219,6 +221,7 @@ public class ProductServiceImpl implements ProductService {
                              productToSave.setStatus(0);
 
                              // save and return an OK status
+                             productToSave.setCategory(categoryRepository.findByCategoryType(productToSave.getCategoryType()));
                              productRepository.save(productToSave);
 
                              return new ResponseEntity<>("Product added Successfully", HttpStatus.OK);
@@ -233,6 +236,7 @@ public class ProductServiceImpl implements ProductService {
                 			 return new ResponseEntity<>("Another Product Exisits with Same name", HttpStatus.FOUND);
                 		}else {
                 			  // save and return an OK status
+                			productToSave.setCategory(categoryRepository.findByCategoryType(productToSave.getCategoryType()));
                             productRepository.save(productToSave);
                             return new ResponseEntity<>("Product Updated Successfully", HttpStatus.OK);
                 		}
