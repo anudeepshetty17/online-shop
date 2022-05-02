@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,8 @@ import com.anudeep.onlineshop.service.CategoryService;
 @RestController
 // url suffix for all mappings
 @RequestMapping("/categories")
+@Secured(value = { "ROLE_ADMIN" }) 
+
 public class CategoryController {
 
     @Autowired
