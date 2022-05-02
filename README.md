@@ -19,3 +19,4 @@ Instructions to run the project:
  - cd to front end directory 
  - npm install 
  - ng serve -o 
+Stable
